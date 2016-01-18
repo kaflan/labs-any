@@ -1,0 +1,7 @@
+{
+  "generator-react-webpack": {
+    "appName": "stringbeautiful",
+    "style": "css",
+    "postcss": false
+  }
+}
