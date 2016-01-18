@@ -19,7 +19,8 @@ List = {
             head: null
         };
     },
-    add: function(list, value) {
+    add: function(list, value) 
+    {
         if (!list.head) {
             list._length++;
             list.head = Node.create(value);
@@ -61,6 +62,7 @@ List = {
     },
     insertAt: function(list, value, index) //вставляет в список l значение v по индексу i
     {
+    	console.log('insert el call function');
         var i = 0;
         var l = list.head;
         var el = Node.create(value);
@@ -71,15 +73,16 @@ List = {
                 break;
             }
             l = l.next;
-            el.next = l;
-            // l = el.next;
-             console.log(i, 'index', l);
-            // list._length++;
+            el = l;
+            // l = el;
+            console.log(i, 'index', el);
             i++;
-             console.log(i, 'index',el);
-
         }
+        if(index === 0){
          el.next = l;
+         list.head = el;
+        }
+         
          list._length++;
         // у тебя не ДОБАВЛЯЕТСЯ элемент
         // а ЗАМЕНЯЕТСЯ
@@ -98,8 +101,8 @@ List = {
 var l = List.create();
 List.add(l, 5);
 List.add(l, 10);
-List.add(l, 20);
-List.add(l, 30);
+// List.add(l, 20);
+// List.add(l, 30);
 
 function print(list) {
     console.log(list.value);
@@ -116,6 +119,7 @@ function print(list) {
 // List.add(t, 14);
 // List.add(t, 13);
 // print(t);
-List.insertAt(l, 15, 1);
+List.insertAt(l, 1, 0);
+List.insertAt(l, 8, 2);
 print(l.head);
-console.log('list', l);
+// console.log('list', l);
