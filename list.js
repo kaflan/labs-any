@@ -53,11 +53,10 @@ List = {
     },
     insertAt: function(list, value, index) //вставляет в список l значение v по индексу i
     {
-        var l = list.head;
-        var createNode = Node.create(value);
+        var newNode = Node.create(value);
         var parentNode = this.get(list,index-1);
-        createNode.next = parentNode.next;
-        parentNode.next = createNode; 
+        newNode.next = parentNode.next;
+        parentNode.next = newNode; 
         list._length++;
     },
     toArray: function(list)
