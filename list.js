@@ -63,49 +63,42 @@ List = {
             }
             l = l.next;
             // l = el;
-            console.log(i, 'index, el ', el);
+          console.log(i, 'index, el ', el);
           i++;  
         }
         if(index === 0){
          el.next = l;
          list.head = el;
         }
-         
          list._length++;
         // у тебя не ДОБАВЛЯЕТСЯ элемент
         // а ЗАМЕНЯЕТСЯ
     },
     toArray: function(list)
-    {
-
+    {	
     	var arr = [];
-    	var head = list;
-   	 	if(list.head){
-   	 		head = list.head.next; 
-    	}
-        for(var i in head){
-        	if(typeof l[i] === 'number'){
-        		arr.push(l[i]);
-        	}
-        	
-        	if(typeof l[i] === 'object') {
-        		this.toArray(l[i]);
-        	}
-        	if(!l[i]){
-        		console.log(l[i], 'aad');
-        		// return;
-        	}
-
-        }
-        return arr;
+    	var l = list.head;
+    	while(l){
+    		arr.push(l.value);
+  			l = l.next;
+    	}    	
+    	return arr;
+        
     },
     size: function(list) //возвращает количество элементов списка
     {
         return list._length;
     },
-    get: function(list, i) //возвращает I-ый элемент списка или false если такой не найден
+    get: function(list, index) //возвращает I-ый элемент списка или false если такой не найден
     {
-    	return false;
+    	console.log('while',list, index);
+    	var l = list.head;
+    	var i = 0;
+    	// if(!l){
+    	// 	return false;
+    	// }
+
+    	return i;
     	
     }
 };
@@ -133,4 +126,4 @@ function print(list) {
 // List.insertAt(l, 1, 0);
 // List.insertAt(l, 8, 2);
 print(l.head);
-console.log('list arr', List.toArray(l));
+console.log('list get', List.get(l,0));
