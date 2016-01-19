@@ -53,24 +53,12 @@ List = {
     },
     insertAt: function(list, value, index) //вставляет в список l значение v по индексу i
     {
-        var i = 0;
         var l = list.head;
-        var el = Node.create(value);
-        while (i !== index) {
-            if (!l.next) {
-                console.log('Not aviable index, can try ', i++, ' index');
-                break;
-            }
-            l = l.next;
-            // l = el;
-          console.log(i, 'index, el ', el);
-          i++;  
-        }
-        if(index === 0){
-         el.next = l;
-         list.head = el;
-        }
+        var createEl = Node.create(value);
+        var getEl = this.get(list,index);
+        createEl.next = getEl;
          list._length++;
+         console.log(getEl);
         // у тебя не ДОБАВЛЯЕТСЯ элемент
         // а ЗАМЕНЯЕТСЯ
     },
@@ -91,14 +79,17 @@ List = {
     },
     get: function(list, index) //возвращает I-ый элемент списка или false если такой не найден
     {
-    	console.log('while',list, index);
     	var l = list.head;
     	var i = 0;
-    	// if(!l){
-    	// 	return false;
-    	// }
-
-    	return i;
+    	while(i !== index){
+    		if (!l.next) {
+                console.log('Not aviable index, can try ', i++, ' index');
+                return false;
+            }
+    		l = l.next;
+    		i++;
+    	}
+    	return l;
     	
     }
 };
@@ -123,7 +114,7 @@ function print(list) {
 // List.add(t, 14);
 // List.add(t, 13);
 // print(t);
-// List.insertAt(l, 1, 0);
+List.insertAt(l, 1, 0);
 // List.insertAt(l, 8, 2);
 print(l.head);
-console.log('list get', List.get(l,0));
+console.log('list get', l);
