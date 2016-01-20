@@ -35,14 +35,15 @@ List = {
 
         //ищет в списке l значение v и возвращает ссылку на элемент списка с этим значением если оно есть, 
         // в противном случае возвращает null
-        this.search(list.head||list.next, value);
-        if(list.value === value){
-        	return list;
-        } 
-        if(list.next){
-        	return this.search(list.next, value);
+        var node = list.head;
+        // console.log('search',node.value);
+        while(node.value !== value){
+        	node = node.next;
+        	if(!node){
+        		return null;
+        	}
         }
-        return null;
+        return node;
        
     },
     remove: function(list, index) //удаляет из списка l элемент по индексу index (индексация с 0)
@@ -114,4 +115,4 @@ function print(list) {
 // List.insertAt(l, 1, 0);
 // List.insertAt(l, 8, 2);
 print(l.head);
-console.log('list get', List.searh(l,2));
+console.log('list search', List.search(l,2));
