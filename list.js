@@ -32,7 +32,17 @@ List = {
     },
     search: function(list, value)
     {
-        //ищет в списке l значение v и возвращает ссылку на элемент списка с этим значением если оно есть, в противном случае возвращает null
+
+        //ищет в списке l значение v и возвращает ссылку на элемент списка с этим значением если оно есть, 
+        // в противном случае возвращает null
+        this.search(list.head||list.next, value);
+        if(list.value === value){
+        	return list;
+        } 
+        if(list.next){
+        	return this.search(list.next, value);
+        }
+        return null;
        
     },
     remove: function(list, index) //удаляет из списка l элемент по индексу index (индексация с 0)
@@ -50,6 +60,7 @@ List = {
         newNode.next = parentNode.next;
         parentNode.next = newNode; 
         list._length++;
+        return parentNode;
     },
     toArray: function(list)
     {	
@@ -101,6 +112,6 @@ function print(list) {
 // List.add(t, 13);
 
 // List.insertAt(l, 1, 0);
-List.insertAt(l, 8, 2);
+// List.insertAt(l, 8, 2);
 print(l.head);
-console.log('list get', List.get(l,2));
+console.log('list get', List.searh(l,2));
