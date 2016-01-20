@@ -33,15 +33,7 @@ List = {
     search: function(list, value)
     {
         //ищет в списке l значение v и возвращает ссылку на элемент списка с этим значением если оно есть, в противном случае возвращает null
-        for (var i in list) {
-            if (list[i] === value) {
-                return search(list[i], value);
-            }
-        }
-        if (list.value === value) {
-            return list;
-        }
-        return null;
+       
     },
     remove: function(list, index) //удаляет из списка l элемент по индексу index (индексация с 0)
     {
@@ -68,7 +60,6 @@ List = {
   			l = l.next;
     	}    	
     	return arr;
-        
     },
     size: function(list) //возвращает количество элементов списка
     {
