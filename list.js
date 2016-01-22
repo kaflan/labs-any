@@ -46,6 +46,10 @@ List = {
     {
       var element = this.get(list, index-1);
       var next = element.next.next;
+      if(!element){
+        console.log(element);
+             }
+
       element.next = next;
        if(!element){
           return null;
