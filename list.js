@@ -29,14 +29,12 @@ List = {
 
   },
   search: function(list, value) {
-
     //ищет в списке l значение v и возвращает ссылку на элемент списка с этим значением если оно есть,
     // в противном случае возвращает null
     var node = list.head;
     while (node) {
       if (node.value === value) break;
       node = node.next;
-
     }
 
     return node;
@@ -44,19 +42,20 @@ List = {
   },
   remove: function(list, index) //удаляет из списка l элемент по индексу index (индексация с 0)
     {
-      var element = this.get(list, index-1);
-      var next = element.next.next;
-      if(!element){
-        console.log(element);
-             }
-
-      element.next = next;
-       if(!element){
-          return null;
+      var element;
+       if(index === 0) {
+         element = this.get(list, index);
        }
+       if(index >= 1 ) {
+         element = this.get(list, index-1);
+       }
+       if(!element){
+         return false;
+       }
+       var next = element.next;
+       element = next;
        List._length--;
-      return element;
-
+       return element;
     },
   isEmpty: function(list) {
     return !list.head;
@@ -64,7 +63,16 @@ List = {
   insertAt: function(list, value, index) //вставляет в список l значение v по индексу i
     {
       var newNode = Node.create(value);
-      var parentNode = this.get(list, index - 1);
+      var parentNode;
+      if(index === 0) {
+        parentNode = this.get(list, index);
+      }
+      if(index >= 1) {
+        parentNode = this.get(list, index - 1);
+      }
+      if(!parentNode) {
+        return false;
+      }
       newNode.next = parentNode.next;
       parentNode.next = newNode;
       list._length++;
@@ -86,9 +94,6 @@ List = {
   get: function(list, index) //возвращает I-ый элемент списка или false если такой не найден
     {
       var node = list.head;
-      // if(index < 0){
-      //   index++;
-      // }
       if (this.size(list) <= index || this.isEmpty(list) || index < 0) {
         return false;
       }
@@ -124,4 +129,4 @@ function print(list) {
 // List.insertAt(l, 1, 0);
 // List.insertAt(l, 8, 2);
 print(l.head);
-console.log('list remove', List.remove(l, 1));
+console.log('list remove', List.remove(l, 0));
