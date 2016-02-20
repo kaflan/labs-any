@@ -6,11 +6,25 @@ function backpack(v, goods){
 	goods.forEach(function(good, index){
 		var niceGoods = [].concat(goods);
 		niceGoods.splice(index, 1);
-		if(goodv <= v && bestPrice < good.p + backpack(v-good.v, niceGoods)){
-			bestPrice = (bestPrice < good.p + backpack(v-good.v, niceGoods));
+		if(good.v <= v && bestPrice < good.p + backpack(v-good.v, niceGoods)){
+			bestPrice = (good.p + backpack(v-good.v, niceGoods));
 		}
 	});
+  console.log(bestPrice)
 	return bestPrice;
-	
 }
-console.log(backpack(120, [{v:100, p: 110},{v:70, p:70}, {v: 50, p:65}]));
+function goods(){
+  var someGoods = Math.floor(Math.random() * (100 - 4 + 1)) + 4;
+  var Goods = function(v, p){
+    this.v = v;
+    this.p = p;
+  }
+  var arr = [];
+  for(var i = 0; i< someGoods; i++){
+    var p = Math.floor(Math.random() * (100 - 4 + 1)) + i;
+    var v = Math.floor(Math.random() * (100 - 4 + 1)) + i;
+    arr.push(new Goods(v, p));
+  }
+  return arr;
+}
+console.log(backpack(120, goods()));
