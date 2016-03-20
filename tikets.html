@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/g/lodash@4.6.1(lodash.min.js+lodash.core.min.js+lodash.fp.min.js+lodash.core.js+lodash.fp.js+lodash.js+mapping.fp.js)"></script>
+<script>
 var Tiket = function(type, startTime, endTime, assigne) {
   this.type = type;
   this.startTime = startTime;
@@ -60,3 +69,6 @@ for (var i = 0; i < type.length; i++) {
   console.log('Минимальное время закрытия тикета: ', type[i], getMinOfArray(timeAll));
   console.log(type[i], choseBestIngener(tikets, assignees, type[i]))
 }
+</script>
+</body>
+</html>
