@@ -109,13 +109,12 @@
         var geoAddress = JSON.parse(localStorage.getItem('arr'));
         var result = [];
           for(var i = 0; i < geoAddress.length; i++){
-            geolib.isPointInCircle(geoAddress[i],myLatLng,3000))
-            if(geolib.isPointInCircle(geoAddress[i],myLatLng,3000))){
-              result.push({address: address[i], geolocation: geoAddress[i]});
-              console.log("точка, которая входят в радиус 3 км от Майдан", address[i],geoAddress[i]);
+            if(geolib.isPointInCircle(geoAddress[i],myLatLng,3000)) {
+              result.push({"address": addresses[i], "geolocation": geoAddress[i]});
+              console.log("точка, которая входят в радиус 3 км от Майдан", addresses[i],geoAddress[i]);
             }
           }
-        console.log('все точки, которые входят в радиус 3 км от Майдана', result);  
+        console.log('все точки, которые входят в радиус 3 км от Майдана', result);
     }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCbqT2t2gTvoav_zE0x16J4CMCiLZv6GW8&callback=initMap" async defer></script>
