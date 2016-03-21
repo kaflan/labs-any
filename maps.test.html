@@ -92,29 +92,49 @@
           center: myLatLng,
           radius: Math.sqrt(3) * 100
         });
+        var requests = [];
 
-        addresses.map(function(add){
-            return geocoder.geocode({
-              'address': add
-            }, function(results, status) {
-              if (status === google.maps.GeocoderStatus.OK) {
-                arr.push({lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng()});
-                localStorage.setItem('arr', JSON.stringify(arr));
-              } else {
-                console.log('Geocode was not successful for the following reason: ' + status);
-              }
-            });
-            return arr;
-        });
-        var geoAddress = JSON.parse(localStorage.getItem('arr'));
-        var result = [];
-          for(var i = 0; i < geoAddress.length; i++){
-            if(geolib.isPointInCircle(geoAddress[i],myLatLng,3000)) {
-              result.push({"address": addresses[i], "geolocation": geoAddress[i]});
-              console.log("точка, которая входят в радиус 3 км от Майдан", addresses[i],geoAddress[i]);
-            }
-          }
-        console.log('все точки, которые входят в радиус 3 км от Майдана', result);
+addresses.forEach(function(add){
+  var p = new Promise(function(resolve, reject) {
+    geocoder.geocode({
+      'address': add
+    }, function(results, status) {
+      if (status === google.maps.GeocoderStatus.OK) {
+        resolve({lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng()});
+      } else {
+        reject('Geocode was not successful for the following reason: ' + status);
+      }
+    })
+  });
+  requests.push(p);
+});
+
+var result = [];
+Promise.all(requests).then(function(arr) {
+for(var i = 0; i < arr.length; i++){
+    if(geolib.isPointInCircle(arr[i],myLatLng,3000)) {
+      result.push({"address": addresses[i], "geolocation": arr[i]});
+      console.log("точка, которая входят в радиус 3 км от Майдан", addresses[i],arr[i]);
+    }
+  }
+console.log('все точки, которые входят в радиус 3 км от Майдана', result);
+});
+        // var result = [];
+        // addresses.forEach(function(add){
+        //     return geocoder.geocode({
+        //       'address': add
+        //     }, function(results, status) {
+        //       if (status === google.maps.GeocoderStatus.OK) {
+        //         arr.push({lat: results[0].geometry.location.lat(), lng: results[0].geometry.location.lng()});
+        //         localStorage.setItem('arr', JSON.stringify(arr));
+        //       } else {
+        //         console.log('Geocode was not successful for the following reason: ' + status);
+        //       }
+        //     });
+        //     return arr;
+        // });
+        // var geoAddress = JSON.parse(localStorage.getItem('arr'));
+        //
     }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCbqT2t2gTvoav_zE0x16J4CMCiLZv6GW8&callback=initMap" async defer></script>
